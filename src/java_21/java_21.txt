@@ -1,0 +1,11 @@
+virtual threads:
+================
+before java 21 =>
+java threads are mapped with OS thread, they were not managed by jvm only mapped by jvm to OS.
+after java 21 => for each thread the virtual thread are created and managed by JVM only.
+                now JVM can managed millions of virtual threads.
+performence wise heavy.
+they are very light so that jvm can manage.
+
+Record Pattern:
+===============

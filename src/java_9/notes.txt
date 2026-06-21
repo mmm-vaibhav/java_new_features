@@ -1,0 +1,10 @@
+Base64 Encoder:
+---------------
+1. With base64 we can convert a text from one to another.
+2. call getEncoder() method to get the encoder object
+    eg: Base64.Encoder encoder = Base64.getEncoder();
+3. call getDecoder() method to get the encoder object
+       eg: Base64.Decoder decoder = Base64.getdecoder();
+
+private method in interface:
+----------------------------

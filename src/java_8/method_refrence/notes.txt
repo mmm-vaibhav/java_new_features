@@ -1,0 +1,4 @@
+1. expression must contain single line of body.
+2. if it is static method call of a class or interface.
+3. if it is method call on lambda argument.
+4. if it is method call which uses lambda expression as parameter.

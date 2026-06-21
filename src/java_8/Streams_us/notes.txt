@@ -1,0 +1,81 @@
+collection: Storing and managing the element's data.
+Streams: just to process that data.
+
+collection: collection holds elements in the memory
+Stream: it does not hold the elements, so it does not occupy the memory.
+
+collection: early loaded
+stream: lazy loaded
+
+collection: collections are mutable.
+Stream: as they are only processing the data from the collection, so they immutable objects.
+
+A stream represents a flow of data from the source(collection).
+creating the object of stream:
+1. creating a stream of raw values:
+    Stream<Integer> stream = Stream.of(10, 12, 14, 15);
+
+2. creating a stream for a collection:
+    Stream<Integer> stream = employeeList.stream();
+
+3. creating a stream for an array:
+    int[] arr = {4,1,5,3,7};
+    Stream<Integer> stream = Arrays.stream(arr);
+
+3. creating an empty stream:
+    Stream<Void> stream = stream.empty();
+
+type of stream operation:
+    A. Intermediate Operation: produces another stream object
+    B. Terminal Operation: (produces end result)
+
+    filter => sorted => count
+
+A. Intermediate Operation: process the elements of one stream and produces another stream.
+B. Terminal Operation: produces the end result of a stream.
+
+Stream<User> stream1 = userList.stream();
+Stream<User> stream2 = stream1.filter(u -> u.getEmail().endsWith("gmail.com")).toList();
+=> toList(); -> terminal Operation, filter() -> intermediate Operation
+
+Operations of Streams:
+----------------------
+
+Intermediate Operations:
+--------------------------
+filter(Predicate<T> predicate):
+    1. it applies the specified predicate on each element of the stream and produces another stream.
+    2. it is a intermediate operation.
+
+map(Function<T> function):
+    1. it applies the specified functionality on each element of the stream, returns a result for each
+        input element.
+    2. the result may be the same type or may be different.
+    3. it is a intermediate operation.
+
+sorted():
+    1. sort the stream in natural sorting order.
+    2. if we want to customize the sorting order then we need specified Comparator as parameter
+
+sorted(Comparator<T> comparator):
+
+Eg: create a List of Strings filter the String with size more than 8 char then convert them UPPER case
+    sort them in descending order.
+
+
+Terminal Operation:
+--------------------
+forEach(Consumer<T> consumer):
+    1. it is a terminal operation.
+    2. it applies the apecified action on each element of the stream.
+
+Parallel Stream:
+----------------
+1. Parallel streams divides the elements of a stream into data chunks(parts).
+2. exeutes the stream operations on each data chunks separately on a different CPU core.
+3. collects the results of the operations from the cores and produces the final result.
+4. so it utilizes the mazimum power of the CPU.
+5. A stream will process the elements on a single core of the cpu.
+    so the performence of the stream is decreased.
+6. if you want apply processing on large amount of data use parallel stream.
+

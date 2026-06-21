@@ -1,0 +1,7 @@
+collectors is a class.
+in the collectors class all methods are static.
+
+grouping by: it acts like group by in sql.
+            it return a map<String, List<T>> type.
+
+Collector(I) obejct can

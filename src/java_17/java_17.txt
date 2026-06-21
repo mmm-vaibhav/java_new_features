@@ -1,0 +1,157 @@
+Sealed Classes & interfaces,
+text blocks,
+enhanced switch,
+record class,
+pattern strategy in switch
+
+
+Sealed Classes & interfaces:
+----------------------------
+1. Sealed class are created to define its child classes in a controlled way.
+2. A sealed class can specify who can be it's child class and who can't.
+3. A sealed class specify its sub type with permits keyword.
+
+which class can be the child of the a class that can be declared as sealed class.
+
+child class of a sealed class can have below below keyword
+1. final - no inheritence
+2. sealed - restriction, permits allowed
+3. non sealed - no restriction, permits not allowed
+
+sealed class A permits B, P, Q{
+
+}
+
+final class B extends A{
+// the class can not be used as parent anymore.
+}
+
+
+sealed interface MyInter permits myClass1 {
+}
+
+class MyClass1 implements MyInter{
+
+}
+
+======================================
+Text Blocks:
+======================================
+1. previously we need to use concatenation and '\n' for multiline String in java.
+2. but in new java versions we can do by """ String """ without using
+    concatenation and '\n' for multiline String in java
+eg:
+public class Text_block_Demo {
+    public static String getString() {
+        return "this is java Text block \nDemo "
+                +"before Java 17 \n";
+    }
+
+    public static String getStringJava17() {
+        return """
+                this is java Text block Demo
+                after Java 17
+                A new feature added.
+                """;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getString());
+        System.out.println("==========================");
+        System.out.println(getStringJava17());
+    }
+
+}
+
+enhanced switch:
+===================
+it can accept multiple values as case.
+it can replace -> for break and return.
+it can accepts objects also.
+we can also return the value from enhenced switch statement
+
+Eg:
+----------------
+public class SwitchEnhencement {
+
+    public static String switchBeforeJava17(char ch){
+        String str =null;
+        switch (ch){
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+                str = "Vowel";
+                break;
+                default:
+                    str = "Invalid";
+
+        }
+        return str;
+    }
+
+    public static String switchAfterJava17(char ch){
+        String str =null;
+        switch (ch){
+            case 'A', 'E', 'I', 'O', 'U' -> str = "Vowel";
+            default -> str = "Invalid";
+        }
+        return str;
+    }
+
+    public static String switchAfterJava17WithReturn(char ch){
+
+        return switch (ch) {
+            case 'A', 'E', 'I', 'O', 'U' -> "Vowel";
+            default -> "Consonent";
+        };
+    }
+
+    public static void main(String[] args) {
+        System.out.println(switchBeforeJava17('A'));
+        System.out.println("=**=".repeat(5));
+        System.out.println(switchAfterJava17('h'));
+        System.out.println("=**=".repeat(5));
+        System.out.println(switchAfterJava17WithReturn('K'));
+
+        System.out.println("=**=".repeat(5));
+        System.out.println(getMonthDays(Month.JANUARY, 2032));
+    }
+
+    private static int getMonthDays(Month month, int year) {
+        return switch (month) {
+            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+            case FEBRUARY -> {
+                yield Year.isLeap(year) ? 29 : 28;
+            }
+            default -> 31;
+        };
+    }
+}
+
+Record Classes:
+-----------------
+to transfer the data from one layer to another layer or from server to client.
+these are immutable objects by default.
+when a record is created with required fields, internally below things will happen.
+   1. all the fields are implicit made as private and final.
+   2. all arg constructor is generated.
+   3. accessor methods are created for the fields
+   (only getters: getters name are same as fields name eg: empName()).
+   4. automatically toString(), hashcode(), equals() methods are generated.
+A records class can not extends another record/normal class but implements interface,
+also implement sealed interface.
+Eg:
+public record Employee(int empNo, String empName, double salary) {
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Employee employee = new Employee(7785, "Scott", 5000.54);
+        System.out.println(employee);
+        System.out.println("==========Getters============");
+        System.out.println(employee.empName());
+
+    }
+}
