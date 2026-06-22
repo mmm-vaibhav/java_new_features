@@ -3,7 +3,7 @@ package java_8.interview_practise;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Dataset_3 {
+public class Stream_on_strings_Dataset_3 {
     public static void main(String[] args) {
         List<String> words =
                 Arrays.asList(
